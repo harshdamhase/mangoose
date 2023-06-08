@@ -4,6 +4,7 @@ import Student from './models/Student.js';
 import dotnv from 'dotenv';
 dotnv.config();
 
+
 const app = express();
  app.use(express.json());
 
