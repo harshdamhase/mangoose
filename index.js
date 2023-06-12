@@ -8,52 +8,13 @@ dotnv.config();
 const app = express();
  app.use(express.json());
 
-
-async function connectMongoDB(){
-    const conn = await mongoose.connect(process.env.MONGO_URL);
-    if(conn)
-    {
-        console.log('Mongo DB Connected');
-    }
-    else
-    {
-        console.log('Error');
-    }
-}
-connectMongoDB();
-
-app.post("/student", async(req,res)=>{
-    const fullName = req.body.fullName;
-    const email = req.body.email;
-    const regNo = req.body.regNo ;
-
-    const newStud = new Student({
-      fullName:fullName,
-      email: email,
-      regNo :regNo 
-    })
-
-    const savedStudent = await newStud.save();
-
-    res.json({
-        success :true,
-        message:'Student Saved Successfully',
-        data : savedStudent
-    })
+  app.get('/student',(req,res)=>{
+    const student=["harshu","aadi","aniket"];
+  
+res.json(Student);
 })
 
-app.get('/students', async(req, res)=>{
-    const students = await Student.find();
-
-    res.json({
-        success:true,
-        message:'Students fetched Successfully',
-        data:students
-    })
+app.listen(5000, ()=>{
+    console.log('listening on port');
 })
-
-app.listen(5000,()=>{
-    console.log('Listen on port 5000');
-})
-
 
